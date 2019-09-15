@@ -1,0 +1,26 @@
+apiVersion: skaffold/v1beta14
+kind: Config
+build:
+  artifacts:
+    - image: eventdlarapi
+      context: Eventdlar.Api
+    - image: eventdlaridentity
+      context: Eventdlar.Identity
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:
+    manifests:
+      - k8s\api.yaml
+      - k8s\identity.yaml
+profiles:
+  - build:
+      local:
+        useBuildkit: false
+        useDockerCLI: true
+    deploy:
+      kubectl:
+        manifests:
+          - k8s\api.yaml
+          - k8s\identity.yaml
+    name: Test

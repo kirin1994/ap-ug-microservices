@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+COPY  *.csproj ./
+RUN dotnet restore
+
+COPY . ./
+RUN dotnet publish -c Release -o /app
+
+FROM base AS final
+WORKDIR /app
+COPY --from=base /app .
+ENTRYPOINT ["dotnet", "Eventdlar.Api.dll"]
