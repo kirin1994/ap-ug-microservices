@@ -7,6 +7,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Eventdlat.Identity
 {
@@ -15,6 +17,7 @@ namespace Eventdlat.Identity
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
+            Task.Run(() => Thread.Sleep(Timeout.Infinite));
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

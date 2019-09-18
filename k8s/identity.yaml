@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: identity
-          image: docker.io/szamurajek/eventdlaridentity:dev
+          image: docker.io/szamurajek/eventdlaridentity:latest
           resources:
             requests:
               memory: "32Mi"
