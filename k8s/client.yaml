@@ -1,37 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapi-deployment
+  name:  client-deployment
 spec:
   selector:
     matchLabels:
-      app: webapi
+      app: client
   template:
     metadata:
       labels:
-        app: webapi
+        app: client
     spec:
       containers:
-        - name: webapi
-          image: docker.io/szamurajek/eventdlarapi:latest
-          resources:
+      - name:  client
+        image:  docker.io/szamurajek/eventdlarclient:latest
+        resources:
             requests:
               memory: "32Mi"
               cpu: "100m"
             limits:
               memory: "128Mi"
               cpu: "500m"
-          ports:
-            - containerPort: 80
+        ports:
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapi-service
+  name:  client-service
 spec:
   selector:
-    app: webapi
+    app:  client
+  type:  NodePort
   ports:
-    - 
-      port: 3000
-      targetPort: 80
+  - nodePort: 31000
+    port:  8080
+    targetPort: 80
