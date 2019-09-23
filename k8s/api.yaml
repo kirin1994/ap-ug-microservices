@@ -30,8 +30,9 @@ metadata:
   name: webapi-service
 spec:
   selector:
-    app: webapi
+    app:  webapi
+  type:  NodePort
   ports:
-    - 
-      port: 3000
-      targetPort: 80
+  - nodePort: 31001
+    port:  8080
+    targetPort: 80

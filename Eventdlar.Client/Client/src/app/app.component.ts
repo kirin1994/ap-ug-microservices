@@ -7,15 +7,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor (private http: HttpClient ) {}
+  constructor (private http: HttpClient) {}
   title = 'Client';
 
   onClickMe()
   { 
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json; charset=utf-8')
-    headers = headers.set('Access-Control-Allow-Origin' , '*');
-
-    this.http.get("webapi-service.default.svc.cluster.local/api/values", {headers}).subscribe(data => console.log(data));
+    
+    var ip = window.location.hostname;
+    var address = "http://" + ip + ":31001/api/values";
+    console.log(address);
+    this.http.get(address).subscribe(data => console.log(data));
   }
 }
