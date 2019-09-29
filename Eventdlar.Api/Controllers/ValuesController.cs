@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
+using RawRabbit;
 
 namespace Eventdlar.Api.Controllers
 {
@@ -13,36 +14,18 @@ namespace Eventdlar.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IBusClient _client;
+        public ValuesController(IBusClient client)
+        {
+            _client = client;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<string> Get()
+        public async Task<ActionResult<string>> Get()
         {
-            Console.WriteLine(HttpContext.Request.Host.Host);
-            var factory = new ConnectionFactory() { HostName = "my-rabbit-rabbitmq-ha.rabbit.svc.cluster.local", Port = 5672, 
-                                                    UserName = "admin", Password = "admin" };
-
-            using (var connection = factory.CreateConnection())
-            {
-                using (var channel = connection.CreateModel())
-                {
-                    channel.QueueDeclare(queue: "hello",
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
-
-                    string message = "Hello World!";
-                    var body = Encoding.UTF8.GetBytes(message);
-
-                    channel.BasicPublish(exchange: "",
-                                        routingKey: "hello",
-                                        basicProperties: null,
-                                        body: body);
-                    Console.WriteLine(" [x] Sent {0}", message);
-                }
-            }
-            var test = "test";
-            return test;
+            var test = await _client.PublishAsync(new );
+            return "dziala";
         }
 
         // GET api/values/5

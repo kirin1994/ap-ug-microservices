@@ -23,14 +23,16 @@ namespace Eventdlar.Api
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            var section = Configuration.GetSection("rabbitmq");
-            var options = new RawRabbitConfiguration();
-            section.Bind(options);
-
-            var client = BusClientFactory.CreateDefault(options);
-            services.AddSingleton<IBusClient>(_ => client);
-
+            AddRabbitMqService(services, Configuration.GetSection("Rabbit"));
         }
+
+        private void AddRabbitMqService(IServiceCollection services, IConfigurationSection configuration)
+        {
+            var options = new RawRabbitConfiguration();
+            configuration.Bind(options);
+            services.AddSingleton<IBusClient>(_ => BusClientFactory.CreateDefault(options));
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

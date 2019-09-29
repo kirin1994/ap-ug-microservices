@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventdlar.Api", "Eventdlar.Api\Eventdlar.Api.csproj", "{4E85A3DC-F28F-4070-A117-D3C6D2F11991}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventdlar.Identity", "Eventdlat.Identity\Eventdlar.Identity.csproj", "{DAF54531-79E7-432C-B322-02A069796B7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventdlar.Identity", "Eventdlar.Identity\Eventdlar.Identity.csproj", "{DAF54531-79E7-432C-B322-02A069796B7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventdlar.Common", "Eventdlar.Common\Eventdlar.Common.csproj", "{E21DE6C4-DB88-4067-BE2A-CB32BC13FE8C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventdlar.Notification", "Eventdlar.Notification\Eventdlar.Notification.csproj", "{46B083EE-285E-4FF0-BB37-BC4E4C3E9C66}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventdlar.Eventer", "Eventdlar.Eventer\Eventdlar.Eventer.csproj", "{EB90CC1A-F852-4D43-85F5-1F0A68E97940}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{DAF54531-79E7-432C-B322-02A069796B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAF54531-79E7-432C-B322-02A069796B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAF54531-79E7-432C-B322-02A069796B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E21DE6C4-DB88-4067-BE2A-CB32BC13FE8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E21DE6C4-DB88-4067-BE2A-CB32BC13FE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E21DE6C4-DB88-4067-BE2A-CB32BC13FE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E21DE6C4-DB88-4067-BE2A-CB32BC13FE8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46B083EE-285E-4FF0-BB37-BC4E4C3E9C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B083EE-285E-4FF0-BB37-BC4E4C3E9C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B083EE-285E-4FF0-BB37-BC4E4C3E9C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B083EE-285E-4FF0-BB37-BC4E4C3E9C66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB90CC1A-F852-4D43-85F5-1F0A68E97940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB90CC1A-F852-4D43-85F5-1F0A68E97940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB90CC1A-F852-4D43-85F5-1F0A68E97940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB90CC1A-F852-4D43-85F5-1F0A68E97940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

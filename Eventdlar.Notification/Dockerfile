@@ -10,4 +10,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=base /app .
-ENTRYPOINT ["dotnet", "Eventdlar.Eventer.dll"]
+ENTRYPOINT ["dotnet", "Eventdlar.Notification.dll"]

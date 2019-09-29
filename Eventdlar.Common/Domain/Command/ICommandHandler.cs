@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
-
-interface ICommandHandler<in T> where T : ICommand
+namespace Eventdlar.Common.Domain.Command
 {
-      Task HandleAsync(T command);
+    public interface ICommandHandler<in T> where T : ICommand
+    {
+        Task HandleAsync(T command);
+    }
 }
