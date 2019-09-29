@@ -12,10 +12,13 @@ export class AppComponent {
 
   onClickMe()
   { 
-    
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'text/plain; charset=utf-8')
+    headers = headers.set('Access-Control-Allow-Origin' , '*');
+
     var ip = window.location.hostname;
     var address = "http://" + ip + ":31001/api/values";
     console.log(address);
-    this.http.get(address).subscribe(data => console.log(data));
+    this.http.get(address, {headers}).subscribe(data => console.log(data));
   }
 }

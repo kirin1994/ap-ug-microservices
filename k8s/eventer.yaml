@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: identity-deployment
+  name: eventer-deployment
 spec:
   selector:
     matchLabels:
-      app: identity
+      app: eventer
   template:
     metadata:
       labels:
-        app: identity
+        app: eventer
     spec:
       containers:
-        - name: identity
-          image: docker.io/szamurajek/eventdlaridentity:latest
+        - name: eventer
+          image: docker.io/szamurajek/eventdlarapi:latest
           resources:
             requests:
               memory: "32Mi"
@@ -27,11 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: identity
+  name: eventer-service
 spec:
   type: ClusterIP
   selector:
     app: identity
   ports:
-    - port: 3111
+    - port: 3112
       targetPort: 80

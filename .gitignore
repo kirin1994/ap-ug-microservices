@@ -2,5 +2,9 @@ Eventdlar.Identity/bin
 Eventdlar.Identity/obj
 Eventdlar.Api/bin
 Eventdlar.Api/obj
+Eventdlar.Eventer/bin
+Eventdlar.Eventer/obj
+Eventdlar.Common/bin
+Eventdlar.Common/obj
 .vs
 .vscode
