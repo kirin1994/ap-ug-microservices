@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RawRabbit;
+using RawRabbit.Configuration;
+using RawRabbit.vNext;
 
 namespace Eventdlar.Api
 {
@@ -20,6 +23,12 @@ namespace Eventdlar.Api
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            var section = Configuration.GetSection("rabbitmq");
+            var options = new RawRabbitConfiguration();
+            section.Bind(options);
+
+            var client = BusClientFactory.CreateDefault(options);
+            services.AddSingleton<IBusClient>(_ => client);
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
