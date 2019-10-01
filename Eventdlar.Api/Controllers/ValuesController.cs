@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Eventdlar.Api.Commands;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using RawRabbit;
@@ -24,7 +25,7 @@ namespace Eventdlar.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
-            var test = await _client.PublishAsync(new );
+            await _client.PublishAsync(new CreateEvent("test", "udalo sie"));
             return "dziala";
         }
 
