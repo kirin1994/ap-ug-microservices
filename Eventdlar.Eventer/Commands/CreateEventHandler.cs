@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using RawRabbit;
 
-namespace Eventdlar.Api.Commands
+namespace Eventdlar.Eventer.Commands
 {
     public class CreateEventHandler : ICommandHandler<CreateEvent>
     {

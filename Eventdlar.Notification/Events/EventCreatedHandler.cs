@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using RawRabbit;
 
-namespace Eventdlar.Api.Events
+namespace Eventdlar.Notification.Events
 {
     public class EventCreatedHandler : IEventHandler<EventCreated>
     {

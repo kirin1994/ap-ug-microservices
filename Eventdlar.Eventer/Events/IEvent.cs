@@ -1,4 +1,4 @@
-namespace Eventdlar.Api.Events
+namespace Eventdlar.Eventer.Events
 {
     public interface IEvent {}
 }

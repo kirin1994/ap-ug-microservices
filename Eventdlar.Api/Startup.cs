@@ -1,6 +1,4 @@
-﻿using Eventdlar.Api.Commands;
-using Eventdlar.Api.Events;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -33,16 +31,12 @@ namespace Eventdlar.Api
             var options = new RawRabbitConfiguration();
             configuration.Bind(options);
             services.AddSingleton<IBusClient>(_ => BusClientFactory.CreateDefault(options));
-            services.AddTransient<ICommandHandler<CreateEvent>, CreateEventHandler>();
-             services.AddTransient<IEventHandler<EventCreated>, EventCreatedHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            app.AddEventHandler<EventCreated>();
-            app.AddCommandHandler<CreateEvent>();
 
             if (env.IsDevelopment())
             {

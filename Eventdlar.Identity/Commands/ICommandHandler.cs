@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Eventdlar.Api.Commands
+namespace Eventdlar.Identity.Commands
 {
     public interface ICommandHandler<T> where T : ICommand
     {

@@ -25,7 +25,8 @@ namespace Eventdlar.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
-            await _client.PublishAsync(new CreateEvent("test", "udalo sie"));
+            await _client.PublishAsync(new CreateEvent("test", "udalo sie"), default(Guid), 
+            cfg => cfg.WithExchange(ex => ex.WithName("Commands")).WithRoutingKey("createevent.#"));
             return "dziala";
         }
 

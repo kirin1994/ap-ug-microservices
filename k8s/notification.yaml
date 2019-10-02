@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: notification
-          image: docker.io/szamurajek/eventdlarapi:latest
+          image: docker.io/szamurajek/eventdlarnotification:latest
           resources:
             requests:
               memory: "32Mi"

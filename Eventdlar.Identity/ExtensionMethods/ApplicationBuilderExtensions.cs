@@ -1,10 +1,11 @@
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
-using Eventdlar.Api.Commands;
+using Eventdlar.Identity.Commands;
 using Microsoft.AspNetCore.Builder;
 using RawRabbit;
 
-namespace Eventdlar.Api.Events
+namespace Eventdlar.Identity.Events
 {
     public static class ApplicationBuilderExtensions
     {
@@ -23,7 +24,13 @@ namespace Eventdlar.Api.Events
             busClient.SubscribeAsync<T>(async (msg, context) => 
             {
                 await handler.HandleAsync(msg);
-            });
+            },configuration => {
+                            configuration.WithQueue(queue => 
+                                queue
+                                .WithName(typeof(T).Name).WithExclusivity(false))
+                                .WithSubscriberId("");
+                            configuration.WithExchange(exchange => exchange.WithName("Events"));
+                            });
 
             return applicationBuilder;
         }
@@ -43,11 +50,14 @@ namespace Eventdlar.Api.Events
             busClient.SubscribeAsync<T>(async (msg, context) => 
             {
                 await handler.HandleAsync(msg);
-            });
+            }, configuration => {
+                            configuration.WithQueue(queue =>queue.WithName(typeof(T).Name)).WithSubscriberId("");
+                            configuration.WithExchange(exchange => exchange.WithName("Commands")); 
+                            });
+
 
             return applicationBuilder;
         }
     }
-
-
-}
+   
+}   

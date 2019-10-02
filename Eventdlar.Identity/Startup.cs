@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Eventdlar.Identity.Commands;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using RawRabbit;
+using RawRabbit.Configuration;
+using RawRabbit.vNext;
 
 namespace Eventdlat.Identity
 {
@@ -27,7 +31,17 @@ namespace Eventdlat.Identity
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            AddRabbitMqService(services, Configuration.GetSection("Rabbit"));
         }
+
+        private void AddRabbitMqService(IServiceCollection services, IConfigurationSection configuration)
+        {
+            var options = new RawRabbitConfiguration();
+            configuration.Bind(options);
+            services.AddSingleton<IBusClient>(_ => BusClientFactory.CreateDefault(options));
+            //services.AddTransient<ICommandHandler<CreateEvent>, CreateEventHandler>();
+        }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: eventer
-          image: docker.io/szamurajek/eventdlarapi:latest
+          image: docker.io/szamurajek/eventdlareventer:latest
           resources:
             requests:
               memory: "32Mi"
