@@ -14,9 +14,4 @@
     <PackageReference Include="RawRabbit" Version="1.10.4" />
     <PackageReference Include="RawRabbit.vNext" Version="1.10.4" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Eventdlar.Common\Eventdlar.Common.csproj" />
-  </ItemGroup>
-
 </Project>
