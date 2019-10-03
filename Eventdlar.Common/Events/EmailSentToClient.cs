@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Eventdlar.Notification.Events
+namespace Eventdlar.Common.Events
 {
     public class EmailSentToClient : IEvent
     {

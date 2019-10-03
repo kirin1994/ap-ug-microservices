@@ -1,11 +1,11 @@
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using Eventdlar.Identity.Commands;
+using Eventdlar.Common.Commands;
 using Microsoft.AspNetCore.Builder;
 using RawRabbit;
 
-namespace Eventdlar.Identity.Events
+namespace Eventdlar.Common.Events
 {
     public static class ApplicationBuilderExtensions
     {

@@ -20,4 +20,8 @@
     <Folder Include="Commands\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Eventdlar.Common\Eventdlar.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Eventdlar.Eventer.Commands
+namespace Eventdlar.Common.Commands
 {
     public class CreateEvent : ICommand
     {

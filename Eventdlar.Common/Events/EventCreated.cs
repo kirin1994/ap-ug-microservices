@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
 
-namespace Eventdlar.Api.Commands
+namespace Eventdlar.Common.Events
 {
-    public class CreateEvent : ICommand
+    public class EventCreated : IEvent
     {
         public string Name {get;}
         public string Description {get;}
-        public CreateEvent(string name, string description)
+        public EventCreated(string name, string description)
         {
             Name = name;
             Description = description;

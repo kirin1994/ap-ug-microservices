@@ -1,4 +1,4 @@
-namespace Eventdlar.Eventer.Events
+namespace Eventdlar.Common.Events
 {
     public interface IEvent {}
 }

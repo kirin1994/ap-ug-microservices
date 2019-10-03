@@ -1,4 +1,4 @@
-namespace Eventdlar.Api.Commands
+namespace Eventdlar.Common.Commands
 {
     public interface ICommand {}
 }

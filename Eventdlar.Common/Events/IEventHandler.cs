@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Eventdlar.Identity.Events
+namespace Eventdlar.Common.Events
 {
     public interface IEventHandler<T> where T : IEvent
     {
