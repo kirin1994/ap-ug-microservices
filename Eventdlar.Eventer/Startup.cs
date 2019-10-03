@@ -1,5 +1,5 @@
-﻿using Eventdlar.Eventer.Commands;
-using Eventdlar.Eventer.Events;
+﻿using Eventdlar.Common.Commands;
+using Eventdlar.Common.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

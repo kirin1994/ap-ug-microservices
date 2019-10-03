@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Eventdlar.Api.Commands;
+using Eventdlar.Common.Commands;
 using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
 using RawRabbit;
 
 namespace Eventdlar.Api.Controllers
