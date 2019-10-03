@@ -20,4 +20,10 @@
     <Folder Include="Commands\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Eventdlar.Common">
+      <HintPath>lib\Eventdlar.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

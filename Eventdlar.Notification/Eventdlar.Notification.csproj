@@ -18,4 +18,10 @@
     <PackageReference Include="RawRabbit.vNext" Version="1.10.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Eventdlar.Common">
+      <HintPath>lib\Eventdlar.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
