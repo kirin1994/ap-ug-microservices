@@ -8,10 +8,10 @@ namespace Eventdlar.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class GatewayController : ControllerBase
     {
         private readonly IBusClient _client;
-        public ValuesController(IBusClient client)
+        public GatewayController(IBusClient client)
         {
             _client = client;
         }
