@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Eventdlar.Common.Commands;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RawRabbit;
 
 namespace Eventdlar.Api.Controllers
@@ -16,7 +17,6 @@ namespace Eventdlar.Api.Controllers
             _client = client;
         }
 
-        // GET api/values
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
@@ -25,29 +25,19 @@ namespace Eventdlar.Api.Controllers
             return "dziala";
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody]CreateEvent command)
         {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+            Console.WriteLine($"{command.Name} {command.Description}");
+            await _client.PublishAsync(command, default(Guid), 
+            cfg => cfg.WithExchange(ex => ex.WithName("Commands")).WithRoutingKey("createevent.#"));
+            return Created("Task",null);
+        }  
     }
 }
