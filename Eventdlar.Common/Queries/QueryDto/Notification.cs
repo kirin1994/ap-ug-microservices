@@ -1,8 +1,9 @@
 using System;
+using Eventdlar.Common.Databases;
 
 namespace Eventdlar.Common.Queries
 {
-    public class Notification
+    public class Notification : IEntity
     {
         public string Email {get;set;}
         public string Text {get;set;}

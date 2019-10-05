@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Eventdlar.Common.Events
 {
-    public class EmailSentToClientHandler : IEventHandler<EmailSentToClient>
+    public class NotificationSentHandler : IEventHandler<NotificationSent>
     {
-        public Task HandleAsync(EmailSentToClient @event)
+        public Task HandleAsync(NotificationSent @event)
         {
             Console.WriteLine($"Client {@event.Name} notified about event on address: {@event.Email} ");
             return Task.CompletedTask;

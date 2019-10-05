@@ -1,6 +1,8 @@
+using Eventdlar.Common.Databases;
+
 namespace Eventdlar.Common.Queries
 {
-    public class Event 
+    public class Event : IEntity
     {
         public string Name {get;set;}
         public string Description {get;set;}

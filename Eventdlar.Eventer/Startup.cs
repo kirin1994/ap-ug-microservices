@@ -1,4 +1,5 @@
 ﻿using Eventdlar.Common.Commands;
+using Eventdlar.Common.Databases;
 using Eventdlar.Common.Events;
 using Eventdlar.Common.Queries;
 using Microsoft.AspNetCore.Builder;
@@ -26,6 +27,8 @@ namespace Eventdlar.Eventer
         {   
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IRepository<Notification, Notifications>, NotificationsInMemoryDb>();
+            services.AddSingleton<IRepository<Event, Events>, EventsInMemoryDb>();
             AddRabbitMqService(services, Configuration.GetSection("Rabbit"));
         }
         private void AddRabbitMqService(IServiceCollection services, IConfigurationSection configuration)
@@ -45,6 +48,7 @@ namespace Eventdlar.Eventer
             app.AddEventHandler<EventCreated>();
             app.AddCommandHandler<CreateEvent>();
             app.AddQueryHandler<GetEvents,Events>();
+
             app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             if (env.IsDevelopment())
             {

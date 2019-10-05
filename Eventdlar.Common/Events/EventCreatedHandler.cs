@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Eventdlar.Common.Commands;
 using RawRabbit;
 
 namespace Eventdlar.Common.Events
@@ -14,7 +15,10 @@ namespace Eventdlar.Common.Events
 
         public Task HandleAsync(EventCreated @event)
         {
-            Console.WriteLine("Event created");
+            var sendNotification = new SendNotification("notificationsub@gmail.com",@event.Name);
+            Console.WriteLine($"Sending SendNotification command: {@event.Name} {@event.Description}");
+            _clientBus.PublishAsync(sendNotification, default(Guid), 
+            cfg => cfg.WithExchange(ex => ex.WithName("Commands")).WithRoutingKey("sendnotification.#"));
             return Task.CompletedTask;
         }
     }

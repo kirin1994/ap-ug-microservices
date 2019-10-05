@@ -1,4 +1,6 @@
-﻿using Eventdlar.Common.Events;
+﻿using Eventdlar.Common.Commands;
+using Eventdlar.Common.Databases;
+using Eventdlar.Common.Events;
 using Eventdlar.Common.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +27,8 @@ namespace Eventdlar.Notification
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IRepository<Eventdlar.Common.Queries.Notification, Notifications>, NotificationsInMemoryDb>();
+            services.AddSingleton<IRepository<Event, Events>, EventsInMemoryDb>();
             AddRabbitMqService(services, Configuration.GetSection("Rabbit"));
         }
 
@@ -33,9 +37,9 @@ namespace Eventdlar.Notification
             var options = new RawRabbitConfiguration();
             configuration.Bind(options);
             services.AddSingleton<IBusClient>(_ => BusClientFactory.CreateDefault(options));
-            services.AddTransient<IEventHandler<EventCreated>, EventCreatedHandler>();
-            services.AddTransient<IEventHandler<EmailSentToClient>, EmailSentToClientHandler>();
+            services.AddTransient<IEventHandler<NotificationSent>, NotificationSentHandler>();
             services.AddTransient<IQueryHandler<GetNotifications, Notifications>, GetNotificationsHandler>();
+            services.AddTransient<ICommandHandler<SendNotification>, SendNotificationHandler>();
         }
 
 
@@ -43,9 +47,9 @@ namespace Eventdlar.Notification
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            app.AddEventHandler<EventCreated>();
-            app.AddEventHandler<EmailSentToClient>();
+            app.AddEventHandler<NotificationSent>();
             app.AddQueryHandler<GetNotifications, Notifications>();
+            app.AddCommandHandler<SendNotification>();
             
             if (env.IsDevelopment())
             {
