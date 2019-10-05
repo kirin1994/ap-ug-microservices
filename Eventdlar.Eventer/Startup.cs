@@ -1,5 +1,6 @@
 ﻿using Eventdlar.Common.Commands;
 using Eventdlar.Common.Events;
+using Eventdlar.Common.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,7 @@ namespace Eventdlar.Eventer
             services.AddSingleton<IBusClient>(_ => BusClientFactory.CreateDefault(options));
             services.AddTransient<ICommandHandler<CreateEvent>, CreateEventHandler>();
             services.AddTransient<IEventHandler<EventCreated>, EventCreatedHandler>();
+            services.AddTransient<IQueryHandler<GetEvents,Events>, GetEventsHandler>();
         }
 
 
@@ -42,6 +44,7 @@ namespace Eventdlar.Eventer
         {
             app.AddEventHandler<EventCreated>();
             app.AddCommandHandler<CreateEvent>();
+            app.AddQueryHandler<GetEvents,Events>();
             app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             if (env.IsDevelopment())
             {

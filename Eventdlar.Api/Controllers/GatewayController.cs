@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Eventdlar.Common.Commands;
+using Eventdlar.Common.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RawRabbit;
@@ -17,22 +19,24 @@ namespace Eventdlar.Api.Controllers
             _client = client;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<string>> Get()
+        [HttpGet("events")]
+        public async Task<ActionResult<Events>> GetEvents()
         {
-            await _client.PublishAsync(new CreateEvent("test", "udalo sie"), default(Guid), 
-            cfg => cfg.WithExchange(ex => ex.WithName("Commands")).WithRoutingKey("createevent.#"));
-            return "dziala";
+            var response = await _client.RequestAsync<GetEvents,Events>(new GetEvents(),default(Guid),
+            cfg => cfg.WithExchange(ex => ex.WithName("Queries")).WithRoutingKey("getevents.#").WithReplyQueue(q => q.WithName(nameof(GetEvents))));
+            return response;
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet("notifications")]
+        public async Task<ActionResult<Notifications>> GetNotification()
         {
-            return "value";
+            var response = await _client.RequestAsync<GetNotifications,Notifications>(new GetNotifications(),default(Guid),
+            cfg => cfg.WithExchange(ex => ex.WithName("Queries")).WithRoutingKey("getnotifications.#").WithReplyQueue(q => q.WithName(nameof(GetNotifications))));
+            return response;
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]CreateEvent command)
+        public async Task<ActionResult> CreateEvent([FromBody]CreateEvent command)
         {
             Console.WriteLine($"{command.Name} {command.Description}");
             await _client.PublishAsync(command, default(Guid), 

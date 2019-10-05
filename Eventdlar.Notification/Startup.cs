@@ -1,4 +1,5 @@
 ﻿using Eventdlar.Common.Events;
+using Eventdlar.Common.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,7 @@ namespace Eventdlar.Notification
             services.AddSingleton<IBusClient>(_ => BusClientFactory.CreateDefault(options));
             services.AddTransient<IEventHandler<EventCreated>, EventCreatedHandler>();
             services.AddTransient<IEventHandler<EmailSentToClient>, EmailSentToClientHandler>();
+            services.AddTransient<IQueryHandler<GetNotifications, Notifications>, GetNotificationsHandler>();
         }
 
 
@@ -43,6 +45,7 @@ namespace Eventdlar.Notification
             app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.AddEventHandler<EventCreated>();
             app.AddEventHandler<EmailSentToClient>();
+            app.AddQueryHandler<GetNotifications, Notifications>();
             
             if (env.IsDevelopment())
             {

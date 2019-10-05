@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using Eventdlar.Common.Commands;
+using Eventdlar.Common.Queries;
 using Microsoft.AspNetCore.Builder;
 using RawRabbit;
 
@@ -56,6 +57,27 @@ namespace Eventdlar.Common.Events
                             });
 
 
+            return applicationBuilder;
+        }
+
+
+            public static IApplicationBuilder AddQueryHandler<T, Y>(this IApplicationBuilder applicationBuilder) where T : IQuery where Y : IQueryResponse
+        {
+            if(!(applicationBuilder.ApplicationServices.GetService(typeof(IBusClient)) is IBusClient busClient))
+            {
+                throw new NullReferenceException();
+            }
+
+            if(!(applicationBuilder.ApplicationServices.GetService(typeof(IQueryHandler<T, Y>)) is IQueryHandler<T, Y> handler ))
+            {
+                throw new NullReferenceException();
+            }
+
+            var axx = busClient.RespondAsync<T, Y>(async (msg, context) => 
+            {
+                return await handler.HandleAsync(msg, busClient);
+            }, configuration => configuration.WithExchange(exchange => exchange.WithName("Queries")));
+        
             return applicationBuilder;
         }
     }

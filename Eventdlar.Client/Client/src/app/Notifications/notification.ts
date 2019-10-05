@@ -1,4 +1,4 @@
-export class Notification{
+export class NotificationMessage{
   constructor(
     public id: number, 
     public email: string,
